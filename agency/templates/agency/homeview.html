@@ -6,18 +6,16 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>HopeFoundation – Charity Platform</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --green-50:#EAF3DE;--green-100:#C0DD97;--green-200:#97C459;
-  --green-600:#3B6D11;--green-700:#27500A;--green-800:#173404;
-  --teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-600:#0F6E56;--teal-800:#085041;
-  --amber-50:#FAEEDA;--amber-100:#FAC775;--amber-600:#854F0B;--amber-800:#633806;
-  --coral-50:#FAECE7;--coral-100:#F5C4B3;--coral-600:#993C1D;--coral-800:#712B13;
-  --gray-50:#F1EFE8;--gray-100:#D3D1C7;--gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#444441;
+  --green-50:#EAF3DE;--green-100:#C0DD97;--green-600:#3B6D11;--green-700:#27500A;--green-800:#173404;
+  --teal-50:#E1F5EE;--teal-100:#9FE1CB;--teal-800:#085041;
+  --amber-50:#FAEEDA;--amber-100:#FAC775;--amber-800:#633806;
+  --coral-50:#FAECE7;--coral-100:#F5C4B3;--coral-800:#712B13;
+  --gray-50:#F1EFE8;--gray-100:#D3D1C7;
   --border:#E8E8E2;--border-light:#F1EFE8;
   --page-bg:#FAFAF7;
   --text-dark:#1a2e0a;--text-mid:#2C2C2A;--text-muted:#5F5E5A;--text-faint:#888780;
@@ -45,346 +43,473 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--page-bg);color:var(--text-mid);line-height:1.6}
-.page{display:none}
-.page.active{display:block}
+.page{display:none}.page.active{display:block}
+img,svg{max-width:100%}
 
 /* ── NAV ── */
-nav{background:#fff;border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:200}
-.logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--green-700);letter-spacing:-0.5px;cursor:pointer}
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:300}
+.logo{font-family:'Playfair Display',serif;font-size:21px;font-weight:900;color:var(--green-700);cursor:pointer;white-space:nowrap}
 .logo span{color:var(--green-600)}
-.nav-links{display:flex;gap:24px;align-items:center}
-.nav-links a{text-decoration:none;font-size:14px;color:var(--text-muted);cursor:pointer;transition:color .2s}
+.nav-links{display:flex;gap:20px;align-items:center}
+.nav-links a{text-decoration:none;font-size:14px;color:var(--text-muted);cursor:pointer;transition:color .2s;white-space:nowrap}
 .nav-links a:hover{color:var(--green-600)}
-.nav-btn{background:var(--green-600);color:#fff;border:none;border-radius:var(--radius-sm);padding:9px 20px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
-.nav-btn:hover{background:var(--green-700)}
-.nav-user{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-muted)}
-.av{width:34px;height:34px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--green-700);flex-shrink:0}
+.nav-btn{background:var(--green-600);color:#fff;border:none;border-radius:var(--radius-sm);padding:9px 18px;font-size:13px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.nav-user{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--text-muted)}
+/* hamburger */
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.ham span{display:block;width:22px;height:2px;background:var(--text-mid);border-radius:2px;transition:all .2s}
+.mob-menu{display:none;position:fixed;top:60px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);z-index:299;padding:16px 5%;flex-direction:column;gap:4px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.mob-menu.open{display:flex}
+.mob-menu a{padding:12px 0;font-size:15px;color:var(--text-muted);cursor:pointer;border-bottom:1px solid var(--border-light);text-decoration:none}
+.mob-menu a:last-child{border-bottom:none}
+.mob-menu .mob-donate{margin-top:8px;width:100%;padding:13px;background:var(--green-600);color:#fff;border:none;border-radius:var(--radius-sm);font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
+.av{width:32px;height:32px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--green-700);flex-shrink:0}
 
-/* ── BUTTONS ── */
+/* ── COMMON BUTTONS ── */
 .btn-primary{background:var(--green-600);color:#fff;border:none;border-radius:var(--radius-sm);padding:13px 26px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
 .btn-primary:hover{background:var(--green-700)}
-.btn-outline{background:transparent;color:var(--green-600);border:1.5px solid var(--green-600);border-radius:var(--radius-sm);padding:12px 24px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.btn-outline{background:transparent;color:var(--green-600);border:1.5px solid var(--green-600);border-radius:var(--radius-sm);padding:12px 22px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
 .btn-outline:hover{background:var(--green-600);color:#fff}
-.btn-sm{padding:8px 16px;font-size:13px}
-.btn-ghost{background:var(--green-50);color:var(--green-700);border:none;border-radius:var(--radius-sm);padding:10px 18px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.btn-sm{padding:8px 14px!important;font-size:13px!important}
+.btn-ghost{background:var(--green-50);color:var(--green-700);border:none;border-radius:var(--radius-sm);padding:10px 16px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
 .btn-ghost:hover{background:var(--green-100)}
-
-/* ── CARDS ── */
 .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
 .card-title{font-size:14px;font-weight:500;color:var(--text-dark);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
 .card-title a{font-size:12px;color:var(--green-600);cursor:pointer;font-weight:400}
-
-/* ── BADGES ── */
 .badge{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:500;display:inline-block}
 .badge-green{background:var(--green-100);color:var(--green-700)}
 .badge-teal{background:var(--teal-100);color:var(--teal-800)}
 .badge-amber{background:var(--amber-100);color:var(--amber-800)}
-.badge-coral{background:var(--coral-100);color:var(--coral-800)}
-
-/* ── SECTION ── */
 .section-label{font-size:12px;font-weight:500;color:var(--text-faint);text-transform:uppercase;letter-spacing:.7px;margin-bottom:14px}
-
-/* ══════════════════════════════════════
-   PAGE 1 – LANDING
-══════════════════════════════════════ */
-.hero{background:linear-gradient(135deg,var(--green-50) 0%,var(--teal-50) 60%,#fff 100%);padding:80px 5% 60px;display:flex;align-items:center;gap:60px;flex-wrap:wrap}
-.hero-text{flex:1;min-width:280px}
-.hero-badge{display:inline-block;background:var(--green-100);color:var(--green-700);font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;letter-spacing:.5px;margin-bottom:20px}
-.hero h1{font-family:'Playfair Display',serif;font-size:50px;font-weight:900;line-height:1.1;color:var(--text-dark);margin-bottom:18px}
-.hero h1 em{font-style:italic;color:var(--green-600)}
-.hero p{font-size:17px;color:var(--text-muted);line-height:1.7;max-width:460px;margin-bottom:32px}
-.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.hero-stats{flex:0 0 320px}
-.stats-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
-.stats-card h3{font-size:12px;color:var(--text-faint);font-weight:400;margin-bottom:16px;text-transform:uppercase;letter-spacing:.8px}
-.stat-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border-light)}
-.stat-row:last-of-type{border-bottom:none}
-.stat-label{font-size:14px;color:var(--text-muted)}
-.stat-val{font-size:16px;font-weight:500;color:var(--text-dark)}
-.stat-val.green{color:var(--green-600)}
-
-/* search */
-.search-section{padding:36px 5%;background:#fff;border-bottom:1px solid var(--border)}
-.search-wrap{display:flex;gap:10px;max-width:700px;margin:0 auto}
-.search-wrap input{flex:1;padding:13px 18px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text-mid);outline:none;transition:border-color .2s}
-.search-wrap input:focus{border-color:var(--green-600)}
-.search-wrap input::placeholder{color:#B4B2A9}
-.search-btn{background:var(--green-600);color:#fff;border:none;border-radius:var(--radius-sm);padding:13px 22px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif}
-.filter-tags{display:flex;gap:8px;flex-wrap:wrap;max-width:700px;margin:12px auto 0}
-.tag{background:var(--gray-50);color:var(--text-muted);border:1px solid var(--gray-100);border-radius:20px;padding:5px 14px;font-size:13px;cursor:pointer;transition:all .18s}
-.tag:hover,.tag.active{background:var(--green-100);color:var(--green-700);border-color:var(--green-100)}
-
-/* project grid */
-.projects-section{padding:56px 5%}
-.section-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px}
-.section-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--text-dark)}
-.see-all{font-size:14px;color:var(--green-600);cursor:pointer;font-weight:500}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.project-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:pointer}
-.project-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.10)}
-.card-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative}
-.card-img .cat-pill{position:absolute;top:12px;left:12px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:12px}
-.card-body{padding:18px}
-.card-org{font-size:12px;color:var(--text-faint);margin-bottom:5px}
-.card-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.3}
-.card-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}
-.prog-bg{background:var(--gray-50);border-radius:4px;height:6px;margin-bottom:10px}
-.prog-fill{height:6px;border-radius:4px;background:var(--green-600)}
-.card-meta{display:flex;justify-content:space-between;font-size:13px}
-.raised{color:var(--green-700);font-weight:500}
-.goal{color:var(--text-faint)}
-.donate-btn{width:100%;margin-top:14px;padding:11px;background:var(--green-50);color:var(--green-700);border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
-.donate-btn:hover{background:var(--green-100)}
-
-/* impact band */
-.impact-band{background:var(--green-700);color:#fff;padding:56px 5%;text-align:center}
-.impact-band h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;margin-bottom:10px;color:var(--green-100)}
-.impact-band p{color:var(--teal-100);font-size:16px;margin-bottom:44px}
-.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:24px;max-width:800px;margin:0 auto}
-.impact-num{font-family:'Playfair Display',serif;font-size:40px;font-weight:900;color:var(--green-100);line-height:1}
-.impact-lbl{font-size:13px;color:var(--teal-100);margin-top:6px}
-
-/* how */
-.how-section{padding:56px 5%;background:var(--page-bg)}
-.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;margin-top:28px}
-.how-step{text-align:center;padding:20px}
-.step-icon{width:54px;height:54px;border-radius:14px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:26px}
-.how-step h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:8px;color:var(--text-dark)}
-.how-step p{font-size:14px;color:var(--text-muted);line-height:1.65}
-
-/* footer */
-footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-logo{font-family:'Playfair Display',serif;font-size:20px;color:var(--green-100);font-weight:900}
-.footer-links{display:flex;gap:20px}
-.footer-links a{color:var(--teal-100);text-decoration:none;font-size:13px;cursor:pointer}
-.footer-links a:hover{color:var(--green-100)}
-.footer-copy{font-size:12px;color:var(--teal-600,#5DCAA5)}
-
-/* donate modal */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:#fff;border-radius:var(--radius-xl);padding:36px;width:360px;max-width:92vw;position:relative}
-.modal h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:6px;color:var(--text-dark)}
-.modal .sub{font-size:13px;color:var(--text-faint);margin-bottom:22px}
-.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--text-faint);line-height:1}
-.amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.amt-btn{padding:12px 6px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);background:#fff;font-size:16px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text-mid);transition:all .18s}
-.amt-btn:hover,.amt-btn.sel{border-color:var(--green-600);background:var(--green-50);color:var(--green-700)}
-.modal input[type=number]{width:100%;padding:11px 14px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);font-size:15px;font-family:'DM Sans',sans-serif;margin-bottom:16px;outline:none}
-.modal input[type=number]:focus{border-color:var(--green-600)}
-.modal-donate-btn{width:100%;padding:14px;background:var(--green-600);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;margin-bottom:10px}
-.modal-donate-btn:hover{background:var(--green-700)}
-.cancel-link{text-align:center;font-size:13px;color:var(--text-faint);cursor:pointer}
-.cancel-link:hover{color:var(--green-600)}
 .success-note{background:var(--green-50);border:1px solid var(--green-100);border-radius:var(--radius-sm);padding:12px;text-align:center;font-size:14px;color:var(--green-700);font-weight:500;margin-bottom:14px;display:none}
 
-/* ══════════════════════════════════════
-   PAGE 2 – PROJECT DETAIL
-══════════════════════════════════════ */
-.detail-layout{max-width:980px;margin:0 auto;padding:32px 5% 60px;display:grid;grid-template-columns:1fr 310px;gap:40px;align-items:start}
-.breadcrumb{font-size:12px;color:var(--text-faint);margin-bottom:14px}
+/* ══ PAGE 1 – LANDING ══ */
+.hero{background:linear-gradient(135deg,var(--green-50) 0%,var(--teal-50) 60%,#fff 100%);padding:60px 5% 50px;display:flex;align-items:center;gap:48px;flex-wrap:wrap}
+.hero-text{flex:1;min-width:260px}
+.hero-badge{display:inline-block;background:var(--green-100);color:var(--green-700);font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;letter-spacing:.5px;margin-bottom:18px}
+.hero h1{font-family:'Playfair Display',serif;font-size:46px;font-weight:900;line-height:1.1;color:var(--text-dark);margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--green-600)}
+.hero p{font-size:16px;color:var(--text-muted);line-height:1.7;max-width:460px;margin-bottom:28px}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hero-stats{flex:0 0 300px;width:100%}
+.stats-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.stats-card h3{font-size:11px;color:var(--text-faint);font-weight:400;margin-bottom:14px;text-transform:uppercase;letter-spacing:.8px}
+.stat-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border-light)}
+.stat-row:last-of-type{border-bottom:none}
+.stat-label{font-size:14px;color:var(--text-muted)}
+.stat-val{font-size:15px;font-weight:500;color:var(--text-dark)}
+.stat-val.green{color:var(--green-600)}
+.search-section{padding:28px 5%;background:#fff;border-bottom:1px solid var(--border)}
+.search-wrap{display:flex;gap:8px;max-width:680px;margin:0 auto}
+.search-wrap input{flex:1;padding:12px 16px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);font-size:15px;font-family:'DM Sans',sans-serif;color:var(--text-mid);outline:none;min-width:0;transition:border-color .2s}
+.search-wrap input:focus{border-color:var(--green-600)}
+.search-wrap input::placeholder{color:#B4B2A9}
+.search-btn{background:var(--green-600);color:#fff;border:none;border-radius:var(--radius-sm);padding:12px 20px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.filter-tags{display:flex;gap:7px;flex-wrap:wrap;max-width:680px;margin:10px auto 0;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+.filter-tags::-webkit-scrollbar{height:3px}.filter-tags::-webkit-scrollbar-thumb{background:var(--gray-100);border-radius:2px}
+.tag{background:var(--gray-50);color:var(--text-muted);border:1px solid var(--gray-100);border-radius:20px;padding:5px 13px;font-size:13px;cursor:pointer;transition:all .18s;white-space:nowrap;flex-shrink:0}
+.tag:hover,.tag.active{background:var(--green-100);color:var(--green-700);border-color:var(--green-100)}
+.projects-section{padding:48px 5%}
+.section-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
+.section-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--text-dark)}
+.see-all{font-size:14px;color:var(--green-600);cursor:pointer;font-weight:500;white-space:nowrap}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.project-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:pointer}
+.project-card:hover{transform:translateY(-3px);box-shadow:0 6px 28px rgba(0,0,0,.10)}
+.card-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
+.cat-pill{position:absolute;top:10px;left:10px;font-size:11px;font-weight:500;padding:3px 10px;border-radius:12px}
+.card-body{padding:16px}
+.card-org{font-size:12px;color:var(--text-faint);margin-bottom:4px}
+.card-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:7px;line-height:1.3}
+.card-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:12px}
+.prog-bg{background:var(--gray-50);border-radius:4px;height:5px;margin-bottom:9px}
+.prog-fill{height:5px;border-radius:4px;background:var(--green-600)}
+.card-meta{display:flex;justify-content:space-between;font-size:13px}
+.raised{color:var(--green-700);font-weight:500}
+.goal-text{color:var(--text-faint)}
+.donate-btn{width:100%;margin-top:12px;padding:11px;background:var(--green-50);color:var(--green-700);border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
+.donate-btn:hover{background:var(--green-100)}
+.impact-band{background:var(--green-700);color:#fff;padding:52px 5%;text-align:center}
+.impact-band h2{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;margin-bottom:10px;color:var(--green-100)}
+.impact-band p{color:var(--teal-100);font-size:16px;margin-bottom:40px}
+.impact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:20px;max-width:760px;margin:0 auto}
+.impact-num{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:var(--green-100);line-height:1}
+.impact-lbl{font-size:13px;color:var(--teal-100);margin-top:6px}
+.how-section{padding:52px 5%;background:var(--page-bg)}
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;margin-top:24px}
+.how-step{text-align:center;padding:16px}
+.step-icon{width:52px;height:52px;border-radius:14px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.how-step h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:7px;color:var(--text-dark)}
+.how-step p{font-size:13px;color:var(--text-muted);line-height:1.6}
+footer{background:var(--green-800);color:var(--teal-100);padding:32px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.footer-logo{font-family:'Playfair Display',serif;font-size:19px;color:var(--green-100);font-weight:900}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{color:var(--teal-100);text-decoration:none;font-size:13px;cursor:pointer}
+.footer-links a:hover{color:var(--green-100)}
+.footer-copy{font-size:12px;color:#5DCAA5}
+
+/* ── DONATE MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:600;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius-xl) var(--radius-xl) 0 0;padding:28px 24px 36px;width:100%;max-width:480px;position:relative;max-height:92vh;overflow-y:auto}
+.modal h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:5px;color:var(--text-dark)}
+.modal .sub{font-size:13px;color:var(--text-faint);margin-bottom:20px}
+.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--text-faint);line-height:1}
+.amt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}
+.amt-btn{padding:13px 6px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);background:#fff;font-size:16px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--text-mid);transition:all .18s}
+.amt-btn:hover,.amt-btn.sel{border-color:var(--green-600);background:var(--green-50);color:var(--green-700)}
+.modal input[type=number]{width:100%;padding:12px 14px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);font-size:15px;font-family:'DM Sans',sans-serif;margin-bottom:14px;outline:none}
+.modal input[type=number]:focus{border-color:var(--green-600)}
+.modal-donate-btn{width:100%;padding:15px;background:var(--green-600);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;margin-bottom:10px}
+.modal-donate-btn:hover{background:var(--green-700)}
+.cancel-link{text-align:center;font-size:13px;color:var(--text-faint);cursor:pointer;padding:4px 0}
+.cancel-link:hover{color:var(--green-600)}
+
+/* ══ PAGE 2 – PROJECT DETAIL ══ */
+.detail-layout{max-width:980px;margin:0 auto;padding:28px 5% 56px;display:grid;grid-template-columns:1fr 300px;gap:36px;align-items:start}
+.breadcrumb{font-size:12px;color:var(--text-faint);margin-bottom:12px}
 .breadcrumb span{color:var(--green-600);cursor:pointer}
-.proj-hero-img{width:100%;height:220px;background:linear-gradient(135deg,var(--green-50),var(--teal-50));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:80px;margin-bottom:26px;border:1px solid var(--border)}
-.org-row{display:flex;align-items:center;gap:10px;margin-bottom:22px;flex-wrap:wrap}
-.org-av{width:34px;height:34px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;color:var(--green-700)}
+.proj-hero-img{width:100%;height:200px;background:linear-gradient(135deg,var(--green-50),var(--teal-50));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:72px;margin-bottom:24px;border:1px solid var(--border)}
+.org-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.org-av{width:32px;height:32px;border-radius:50%;background:var(--green-50);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--green-700)}
 .org-name-text{font-size:14px;color:var(--text-muted)}
 .org-name-text strong{color:var(--text-mid)}
 .verified-badge{font-size:11px;background:var(--teal-50);color:var(--teal-800);padding:3px 9px;border-radius:10px;font-weight:500}
-.tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:26px}
-.tab{padding:10px 20px;font-size:14px;font-weight:500;color:var(--text-faint);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .18s}
+.tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:10px 18px;font-size:14px;font-weight:500;color:var(--text-faint);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .18s;white-space:nowrap;flex-shrink:0}
 .tab.active{color:var(--green-600);border-bottom-color:var(--green-600)}
 .tab:hover{color:var(--green-600)}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-.about-text{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:18px}
-.milestone-list{list-style:none;margin-top:14px}
-.milestone-list li{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border-light);font-size:14px;color:var(--text-muted)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.about-text{font-size:15px;color:var(--text-muted);line-height:1.75;margin-bottom:16px}
+.milestone-list{list-style:none;margin-top:12px}
+.milestone-list li{display:flex;align-items:flex-start;gap:11px;padding:10px 0;border-bottom:1px solid var(--border-light);font-size:14px;color:var(--text-muted)}
 .ms-dot{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px}
-.ms-done{background:var(--green-50);color:var(--green-600)}
-.ms-pending{background:var(--gray-50);color:var(--text-faint)}
-.update-item{padding:16px 0;border-bottom:1px solid var(--border-light)}
+.ms-done{background:var(--green-50);color:var(--green-600)}.ms-pending{background:var(--gray-50);color:var(--text-faint)}
+.update-item{padding:14px 0;border-bottom:1px solid var(--border-light)}
 .update-date{font-size:12px;color:var(--text-faint);margin-bottom:4px}
-.update-title{font-size:15px;font-weight:500;color:var(--text-dark);margin-bottom:6px}
+.update-title{font-size:15px;font-weight:500;color:var(--text-dark);margin-bottom:5px}
 .update-body{font-size:13px;color:var(--text-muted);line-height:1.65}
-.donor-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border-light)}
+.donor-item{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border-light)}
 .donor-item:last-child{border-bottom:none}
 .donor-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
-.donor-info{flex:1}
+.donor-info{flex:1;min-width:0}
 .donor-name{font-size:14px;font-weight:500;color:var(--text-dark)}
 .donor-time{font-size:12px;color:var(--text-faint)}
-.donor-amt{font-size:15px;font-weight:500;color:var(--green-600)}
-
-/* sidebar donate card */
-.donate-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:18px}
-.raised-big{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:var(--text-dark)}
-.raised-of{font-size:13px;color:var(--text-faint);margin-bottom:13px}
-.prog-bg2{background:var(--gray-50);border-radius:6px;height:10px;margin-bottom:13px}
-.prog-fill2{height:10px;border-radius:6px;background:var(--green-600);transition:width .5s}
-.prog-stats{display:flex;justify-content:space-between;font-size:13px;color:var(--text-muted);margin-bottom:18px}
+.donor-amt{font-size:14px;font-weight:500;color:var(--green-600)}
+.donate-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:16px}
+.raised-big{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--text-dark)}
+.raised-of{font-size:13px;color:var(--text-faint);margin-bottom:12px}
+.prog-bg2{background:var(--gray-50);border-radius:6px;height:9px;margin-bottom:12px}
+.prog-fill2{height:9px;border-radius:6px;background:var(--green-600);transition:width .5s}
+.prog-stats{display:flex;justify-content:space-between;font-size:12px;color:var(--text-muted);margin-bottom:16px}
 .prog-stats strong{color:var(--text-dark)}
-.amt-grid2{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.amt2{padding:10px 6px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);background:#fff;font-size:14px;font-weight:500;cursor:pointer;color:var(--text-mid);transition:all .18s;font-family:'DM Sans',sans-serif}
+.amt-grid2{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px}
+.amt2{padding:10px 4px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);background:#fff;font-size:14px;font-weight:500;cursor:pointer;color:var(--text-mid);transition:all .18s;font-family:'DM Sans',sans-serif}
 .amt2:hover,.amt2.sel{border-color:var(--green-600);background:var(--green-50);color:var(--green-700)}
-.custom-in{width:100%;padding:10px 12px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);font-size:14px;font-family:'DM Sans',sans-serif;margin-bottom:12px;outline:none}
+.custom-in{width:100%;padding:10px 12px;border:1.5px solid var(--gray-100);border-radius:var(--radius-sm);font-size:14px;font-family:'DM Sans',sans-serif;margin-bottom:10px;outline:none}
 .custom-in:focus{border-color:var(--green-600)}
-.donate-now-btn{width:100%;padding:13px;background:var(--green-600);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:10px;transition:background .2s}
+.donate-now-btn{width:100%;padding:13px;background:var(--green-600);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:8px;transition:background .2s}
 .donate-now-btn:hover{background:var(--green-700)}
 .share-btn{width:100%;padding:11px;background:var(--green-50);color:var(--green-700);border:none;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s}
 .share-btn:hover{background:var(--green-100)}
-.org-info-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:18px}
+.org-info-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:16px}
 .org-info-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--border-light)}
 .org-info-row:last-child{border-bottom:none}
 .org-info-row span:first-child{color:var(--text-muted)}
 .org-info-row span:last-child{font-weight:500;color:var(--text-dark)}
 
-/* ══════════════════════════════════════
-   PAGE 3 – NONPROFIT PROFILE
-══════════════════════════════════════ */
-.hero-band{background:var(--green-50);padding:36px 5% 0;border-bottom:1px solid #D3E8BD}
-.hero-band-inner{max-width:980px;margin:0 auto;display:flex;align-items:flex-end;gap:22px;flex-wrap:wrap}
-.org-logo-box{width:78px;height:78px;border-radius:16px;background:var(--green-700);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--green-100);flex-shrink:0}
-.hero-band-text{flex:1;padding-bottom:20px;min-width:200px}
-.org-page-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--text-dark);margin-bottom:4px}
-.org-meta-row{font-size:13px;color:var(--text-muted);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px}
-.hero-band-actions{display:flex;gap:10px;flex-direction:column;padding-bottom:20px}
-.profile-nav-tabs{background:#fff;border-bottom:2px solid var(--border)}
-.profile-nav-inner{max-width:980px;margin:0 auto;display:flex;padding:0 5%}
-.ptab{padding:13px 20px;font-size:14px;font-weight:500;color:var(--text-faint);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .18s}
+/* ══ PAGE 3 – NONPROFIT ══ */
+.hero-band{background:var(--green-50);padding:28px 5% 0;border-bottom:1px solid #D3E8BD}
+.hero-band-inner{max-width:980px;margin:0 auto;display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.org-logo-box{width:72px;height:72px;border-radius:14px;background:var(--green-700);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--green-100);flex-shrink:0}
+.hero-band-text{flex:1;padding-bottom:18px;min-width:180px}
+.org-page-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--text-dark);margin-bottom:4px}
+.org-meta-row{font-size:13px;color:var(--text-muted);display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.hero-band-actions{display:flex;gap:8px;padding-bottom:18px;flex-wrap:wrap}
+.profile-nav-tabs{background:#fff;border-bottom:2px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.profile-nav-tabs::-webkit-scrollbar{display:none}
+.profile-nav-inner{max-width:980px;margin:0 auto;display:flex;padding:0 5%;min-width:max-content}
+.ptab{padding:13px 18px;font-size:14px;font-weight:500;color:var(--text-faint);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .18s;white-space:nowrap}
 .ptab.active{color:var(--green-600);border-bottom-color:var(--green-600)}
 .ptab:hover{color:var(--green-600)}
-.profile-body{max-width:980px;margin:0 auto;padding:30px 5% 60px;display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:start}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.stat-box{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center}
-.stat-box-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--text-dark)}
-.stat-box-lbl{font-size:12px;color:var(--text-faint);margin-top:4px}
-.proj-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:box-shadow .18s}
-.proj-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
-.proj-icon{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
-.proj-info{flex:1}
-.proj-cat{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;margin-bottom:6px;display:inline-block}
+.profile-body{max-width:980px;margin:0 auto;padding:26px 5% 56px;display:grid;grid-template-columns:1fr 268px;gap:28px;align-items:start}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.stat-box{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;text-align:center}
+.stat-box-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--text-dark)}
+.stat-box-lbl{font-size:11px;color:var(--text-faint);margin-top:4px}
+.proj-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;cursor:pointer;transition:box-shadow .18s}
+.proj-card:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.proj-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.proj-info{flex:1;min-width:0}
+.proj-cat{font-size:11px;font-weight:500;padding:2px 8px;border-radius:10px;margin-bottom:5px;display:inline-block}
 .proj-name{font-size:14px;font-weight:500;color:var(--text-dark);margin-bottom:4px}
-.proj-pg-bg{background:var(--gray-50);border-radius:3px;height:5px;margin-bottom:5px}
+.proj-pg-bg{background:var(--gray-50);border-radius:3px;height:5px;margin-bottom:4px}
 .proj-pg-fill{height:5px;border-radius:3px;background:var(--green-600)}
-.proj-pg-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-faint)}
+.proj-pg-row{display:flex;justify-content:space-between;font-size:11px;color:var(--text-faint)}
 .proj-pg-row strong{color:var(--text-dark)}
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
 .team-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;text-align:center}
-.team-av{width:46px;height:46px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:500}
+.team-av{width:44px;height:44px;border-radius:50%;margin:0 auto 9px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500}
 .team-name{font-size:13px;font-weight:500;color:var(--text-dark);margin-bottom:2px}
-.team-role{font-size:12px;color:var(--text-faint)}
-.info-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:18px;margin-bottom:14px}
-.info-row{display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border-light)}
+.team-role{font-size:11px;color:var(--text-faint)}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;margin-bottom:12px}
+.info-row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;border-bottom:1px solid var(--border-light)}
 .info-row:last-child{border-bottom:none}
 .info-row span:first-child{color:var(--text-muted)}
 .info-row span:last-child{font-weight:500;color:var(--text-dark)}
-.trust-ring{width:80px;height:80px;margin:0 auto 10px;position:relative}
+.trust-ring{width:76px;height:76px;margin:0 auto 8px;position:relative}
 .trust-ring svg{transform:rotate(-90deg)}
-.trust-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:20px;font-weight:700;color:var(--text-dark);font-family:'Playfair Display',serif}
-.trust-items{list-style:none;margin-top:12px}
+.trust-val{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:19px;font-weight:700;color:var(--text-dark);font-family:'Playfair Display',serif}
+.trust-items{list-style:none;margin-top:10px}
 .trust-items li{font-size:13px;color:var(--text-muted);padding:5px 0;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border-light)}
 .trust-items li:last-child{border-bottom:none}
 .trust-items li::before{content:'✓';color:var(--green-600);font-weight:700;font-size:13px;flex-shrink:0}
 
-/* ══════════════════════════════════════
-   PAGE 4 – DONOR DASHBOARD
-══════════════════════════════════════ */
-.dashboard-layout{display:grid;grid-template-columns:210px 1fr}
-.dash-sidebar{background:#fff;border-right:1px solid var(--border);padding:22px 0;min-height:calc(100vh - 64px)}
-.dash-sb-label{font-size:11px;font-weight:500;color:#C4C3BB;text-transform:uppercase;letter-spacing:.8px;padding:0 12px 8px;margin:0 4px}
+/* ══ PAGE 4 – DASHBOARD ══ */
+.dashboard-layout{display:grid;grid-template-columns:200px 1fr}
+.dash-sidebar{background:#fff;border-right:1px solid var(--border);padding:18px 0;min-height:calc(100vh - 60px)}
+.dash-sb-label{font-size:11px;font-weight:500;color:#C4C3BB;text-transform:uppercase;letter-spacing:.8px;padding:0 16px 7px}
 .dash-sb-item{display:flex;align-items:center;gap:10px;padding:9px 16px;border-radius:var(--radius-sm);font-size:14px;color:var(--text-muted);cursor:pointer;transition:all .15s;margin:1px 8px}
 .dash-sb-item:hover{background:var(--gray-50);color:var(--text-dark)}
 .dash-sb-item.active{background:var(--green-50);color:var(--green-700);font-weight:500}
 .dash-sb-icon{font-size:16px;width:20px;text-align:center}
 .dash-sb-badge{margin-left:auto;background:var(--green-100);color:var(--green-700);font-size:11px;padding:2px 7px;border-radius:10px;font-weight:500}
-.dash-sb-user{padding:14px 16px;border-top:1px solid var(--border);margin-top:10px;display:flex;align-items:center;gap:10px}
+.dash-sb-user{padding:12px 16px;border-top:1px solid var(--border);margin-top:8px;display:flex;align-items:center;gap:10px}
 .dash-sb-name{font-size:13px;font-weight:500;color:var(--text-dark)}
 .dash-sb-since{font-size:11px;color:var(--text-faint)}
-.dash-main{padding:26px 28px;overflow-y:auto}
-.dash-page-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--text-dark);margin-bottom:4px}
-.dash-page-sub{font-size:14px;color:var(--text-faint);margin-bottom:24px}
-.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.metric{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:16px}
-.metric-lbl{font-size:12px;color:var(--text-faint);margin-bottom:5px}
-.metric-val{font-size:22px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-dark);margin-bottom:2px}
-.metric-delta{font-size:12px;color:var(--green-600)}
-.two-col-dash{display:grid;grid-template-columns:1fr 260px;gap:16px;margin-bottom:20px}
-.bar-chart-wrap{display:flex;align-items:flex-end;gap:5px;height:110px;margin-bottom:6px}
-.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
-.bar-rect{width:100%;border-radius:3px 3px 0 0;background:var(--green-100);transition:background .2s;cursor:pointer;min-height:3px}
+/* mobile dash bottom nav */
+.dash-bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);z-index:250;padding:0}
+.dash-bottom-nav-inner{display:flex;justify-content:space-around}
+.dbn-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 4px 14px;font-size:10px;color:var(--text-faint);cursor:pointer;border:none;background:none;font-family:'DM Sans',sans-serif;transition:color .15s}
+.dbn-item.active{color:var(--green-600)}
+.dbn-item span:first-child{font-size:20px}
+.dash-main{padding:22px 20px;overflow-y:auto}
+.dash-page-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--text-dark);margin-bottom:4px}
+.dash-page-sub{font-size:14px;color:var(--text-faint);margin-bottom:20px}
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.metric{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:14px}
+.metric-lbl{font-size:11px;color:var(--text-faint);margin-bottom:4px}
+.metric-val{font-size:20px;font-weight:700;font-family:'Playfair Display',serif;color:var(--text-dark);margin-bottom:2px}
+.metric-delta{font-size:11px;color:var(--green-600)}
+.two-col-dash{display:grid;grid-template-columns:1fr 240px;gap:14px;margin-bottom:16px}
+.bar-chart-wrap{display:flex;align-items:flex-end;gap:4px;height:100px;margin-bottom:5px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center}
+.bar-rect{width:100%;border-radius:3px 3px 0 0;background:var(--green-100);cursor:pointer;min-height:3px;transition:background .2s}
 .bar-rect:hover{background:var(--green-600)}
 .bar-lbl{font-size:10px;color:var(--text-faint)}
 .cause-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border-light)}
 .cause-row:last-child{border-bottom:none}
 .cause-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 .cause-nm{font-size:13px;color:var(--text-mid);flex:1}
-.cause-bar-bg{width:70px;background:var(--gray-50);border-radius:3px;height:5px}
+.cause-bar-bg{width:60px;background:var(--gray-50);border-radius:3px;height:5px}
 .cause-bar-fill{height:5px;border-radius:3px}
-.cause-pct{font-size:13px;font-weight:500;color:var(--text-dark);min-width:28px;text-align:right}
-.history-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border-light)}
+.cause-pct{font-size:12px;font-weight:500;color:var(--text-dark);min-width:26px;text-align:right}
+.history-item{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--border-light)}
 .history-item:last-child{border-bottom:none}
-.h-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.h-info{flex:1}
-.h-name{font-size:14px;font-weight:500;color:var(--text-dark);margin-bottom:2px}
-.h-org{font-size:12px;color:var(--text-faint)}
-.h-right{text-align:right}
-.h-amt{font-size:14px;font-weight:500;color:var(--green-600)}
+.h-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.h-info{flex:1;min-width:0}
+.h-name{font-size:13px;font-weight:500;color:var(--text-dark);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.h-org{font-size:11px;color:var(--text-faint)}
+.h-right{text-align:right;flex-shrink:0}
+.h-amt{font-size:13px;font-weight:500;color:var(--green-600)}
 .h-date{font-size:11px;color:var(--text-faint)}
-.h-status{font-size:11px;padding:2px 8px;border-radius:10px;margin-top:3px;display:inline-block}
+.h-status{font-size:10px;padding:2px 7px;border-radius:10px;margin-top:2px;display:inline-block}
 .status-done{background:var(--green-50);color:var(--green-700)}
 .status-monthly{background:var(--teal-50);color:var(--teal-800)}
-.impact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.impact-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:18px;text-align:center}
-.impact-emoji{font-size:32px;margin-bottom:8px}
-.impact-num{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--text-dark);margin-bottom:4px}
-.impact-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
-.cert-banner{background:var(--green-50);border:1px solid var(--green-100);border-radius:var(--radius-md);padding:22px;text-align:center;margin-bottom:20px}
-.cert-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;color:var(--text-dark);margin-bottom:6px}
-.cert-sub{font-size:14px;color:var(--green-600);margin-bottom:14px}
-.follow-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.follow-org-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:12px;display:flex;align-items:center;gap:10px}
-.follow-org-av{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.impact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.impact-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center}
+.impact-emoji{font-size:28px;margin-bottom:7px}
+.impact-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--text-dark);margin-bottom:3px}
+.impact-desc{font-size:11px;color:var(--text-muted);line-height:1.5}
+.cert-banner{background:var(--green-50);border:1px solid var(--green-100);border-radius:var(--radius-md);padding:20px;text-align:center;margin-bottom:18px}
+.cert-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:900;color:var(--text-dark);margin-bottom:5px}
+.cert-sub{font-size:13px;color:var(--green-600);margin-bottom:12px}
+.follow-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.follow-org-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-md);padding:11px;display:flex;align-items:center;gap:9px}
+.follow-org-av{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
 .follow-org-info{flex:1;min-width:0}
-.follow-org-name{font-size:13px;font-weight:500;color:var(--text-dark);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.follow-org-name{font-size:12px;font-weight:500;color:var(--text-dark);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .follow-org-cat{font-size:11px;color:var(--text-faint)}
-.unfollow-btn{font-size:11px;color:var(--text-faint);cursor:pointer;border:1px solid var(--gray-100);border-radius:6px;padding:3px 8px;background:none;font-family:'DM Sans',sans-serif;flex-shrink:0}
+.unfollow-btn{font-size:11px;color:var(--text-faint);cursor:pointer;border:1px solid var(--gray-100);border-radius:6px;padding:3px 7px;background:none;font-family:'DM Sans',sans-serif;flex-shrink:0}
 .unfollow-btn:hover{border-color:#E24B4A;color:#E24B4A}
-.dash-panel{display:none}
-.dash-panel.active{display:block}
+.dash-panel{display:none}.dash-panel.active{display:block}
+
+/* ════════════════════
+   RESPONSIVE – TABLET  (max 768px)
+════════════════════ */
+@media(max-width:768px){
+  /* nav */
+  .nav-links a:not(.keep){display:none}
+  .ham{display:flex}
+
+  /* hero */
+  .hero{padding:40px 5% 36px;flex-direction:column;gap:28px}
+  .hero h1{font-size:34px}
+  .hero p{font-size:15px;max-width:100%}
+  .hero-stats{flex:none;width:100%}
+  .hero-actions .btn-outline{display:none}
+
+  /* search */
+  .filter-tags{flex-wrap:nowrap;overflow-x:auto}
+
+  /* projects */
+  .projects-section{padding:36px 5%}
+  .section-title{font-size:24px}
+  .projects-grid{grid-template-columns:1fr 1fr}
+
+  /* impact */
+  .impact-band{padding:40px 5%}
+  .impact-band h2{font-size:26px}
+  .impact-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+
+  /* how */
+  .how-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* footer */
+  footer{flex-direction:column;align-items:flex-start;gap:12px}
+  .footer-links{gap:12px}
+
+  /* modal – full bottom sheet */
+  .modal{border-radius:var(--radius-xl) var(--radius-xl) 0 0}
+
+  /* detail page */
+  .detail-layout{grid-template-columns:1fr;gap:0}
+  .detail-layout>div:last-child{margin-top:28px}
+
+  /* nonprofit */
+  .hero-band-inner{flex-direction:column;align-items:flex-start;gap:14px}
+  .hero-band-actions{flex-direction:row}
+  .profile-body{grid-template-columns:1fr}
+  .profile-body>div:last-child{margin-top:0}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+
+  /* dashboard */
+  .dashboard-layout{grid-template-columns:1fr}
+  .dash-sidebar{display:none}
+  .dash-bottom-nav{display:block}
+  .dash-main{padding:18px 16px 80px}
+  .metrics-row{grid-template-columns:repeat(2,1fr)}
+  .two-col-dash{grid-template-columns:1fr}
+  .impact-cards{grid-template-columns:repeat(2,1fr)}
+  .follow-card-grid{grid-template-columns:1fr}
+}
+
+/* ════════════════════
+   RESPONSIVE – MOBILE  (max 480px)
+════════════════════ */
+@media(max-width:480px){
+  /* nav */
+  nav{padding:0 4%;height:56px}
+  .logo{font-size:18px}
+
+  /* hero */
+  .hero{padding:32px 4% 28px}
+  .hero h1{font-size:28px}
+  .hero-badge{font-size:11px}
+  .hero p{font-size:14px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-actions .btn-primary{width:100%;text-align:center;padding:14px}
+  .stats-card{padding:18px}
+
+  /* search */
+  .search-section{padding:20px 4%}
+  .search-wrap{flex-direction:column}
+  .search-btn{width:100%;padding:13px}
+  .search-wrap input{padding:13px 14px}
+
+  /* projects */
+  .projects-section{padding:28px 4%}
+  .projects-grid{grid-template-columns:1fr}
+  .section-header{flex-wrap:wrap;gap:6px}
+
+  /* impact */
+  .impact-grid{grid-template-columns:1fr 1fr}
+  .impact-num{font-size:30px}
+
+  /* how */
+  .how-grid{grid-template-columns:1fr}
+  .how-section{padding:36px 4%}
+
+  /* detail */
+  .detail-layout{padding:20px 4% 40px}
+  .proj-hero-img{height:160px;font-size:56px}
+  .tab{padding:9px 12px;font-size:13px}
+  h1[style]{font-size:22px!important}
+
+  /* nonprofit */
+  .hero-band{padding:20px 4% 0}
+  .org-logo-box{width:60px;height:60px;font-size:20px}
+  .org-page-title{font-size:20px}
+  .org-meta-row{font-size:12px;gap:8px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .profile-body{padding:20px 4% 48px}
+  .hero-band-actions{width:100%}
+  .hero-band-actions .btn-primary,.hero-band-actions .btn-outline{flex:1;text-align:center}
+
+  /* dashboard */
+  .dash-main{padding:16px 14px 76px}
+  .metrics-row{grid-template-columns:1fr 1fr;gap:8px}
+  .metric-val{font-size:18px}
+  .impact-cards{grid-template-columns:repeat(2,1fr)}
+  .follow-card-grid{grid-template-columns:1fr}
+  .two-col-dash{grid-template-columns:1fr}
+  .dash-page-title{font-size:20px}
+
+  /* modal */
+  .modal{padding:22px 18px 32px}
+  .amt-btn{padding:12px 4px;font-size:14px}
+
+  /* footer */
+  footer{padding:24px 4%}
+  .footer-links{flex-wrap:wrap;gap:10px}
+}
 </style>
 </head>
 <body>
 
-<!-- ═══ SHARED NAV (changes per page) ═══ -->
+<!-- ═══ NAV ═══ -->
 <nav id="main-nav">
   <div class="logo" onclick="goTo('landing')">Hope<span>Foundation</span></div>
   <div id="nav-content-landing" class="nav-links">
-    <a onclick="goTo('landing')">Explore projects</a>
+    <a onclick="goTo('landing')">Explore</a>
     <a onclick="goTo('nonprofit')">Nonprofits</a>
-    <a onclick="goTo('dashboard')">My dashboard</a>
+    <a onclick="goTo('dashboard')">Dashboard</a>
     <button class="nav-btn" onclick="openModal('General Fund')">Donate now</button>
   </div>
   <div id="nav-content-detail" class="nav-links" style="display:none">
-    <a onclick="goTo('landing')">← Back to projects</a>
-    <button class="nav-btn" onclick="openModal('Safe Drinking Water')">Donate now</button>
+    <a onclick="goTo('landing')">← Projects</a>
+    <button class="nav-btn" onclick="openModal('Safe Drinking Water')">Donate</button>
   </div>
   <div id="nav-content-nonprofit" class="nav-links" style="display:none">
-    <a onclick="goTo('landing')">← All nonprofits</a>
+    <a onclick="goTo('landing')">← Back</a>
     <button class="nav-btn" onclick="openModal('CleanWater Initiative')">Donate</button>
   </div>
   <div id="nav-content-dashboard" class="nav-links" style="display:none">
-    <div class="nav-user"><div class="av">JA</div><span>James Adeyemi</span></div>
+    <div class="nav-user"><div class="av">DO</div><span>Donor.</span></div>
   </div>
+  <button class="ham" id="ham-btn" onclick="toggleMob()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<!-- ════════════════════════════════════
-     PAGE 1 – LANDING
-════════════════════════════════════ -->
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mob-menu">
+  <a onclick="goTo('landing');closeMob()">🔍 Explore projects</a>
+  <a onclick="goTo('nonprofit');closeMob()">🏢 Nonprofits</a>
+  <a onclick="goTo('dashboard');closeMob()">📊 My dashboard</a>
+  <button class="mob-donate" onclick="openModal('General Fund');closeMob()">Donate now</button>
+</div>
+
+<!-- ═══ PAGE 1 – LANDING ═══ -->
 <div class="page active" id="page-landing">
   <section class="hero">
     <div class="hero-text">
       <div class="hero-badge">🌍 Trusted by 4,200+ nonprofits worldwide</div>
       <h1>Change lives with <em>every</em> donation you make</h1>
-      <p>Discover verified projects in education, clean water, healthcare and more. Every dollar is tracked and reported — so you always know your impact.</p>
+      <p>Discover verified projects in education, clean water, healthcare and more. Every dollar is tracked and reported.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="document.getElementById('projects-anchor').scrollIntoView({behavior:'smooth'})">Browse projects</button>
         <button class="btn-outline" onclick="openModal('General Fund')">Make a donation</button>
@@ -403,7 +528,7 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
 
   <div class="search-section">
     <div class="search-wrap">
-      <input type="text" id="search-input" placeholder="Search projects — e.g. 'clean water in Kenya', 'girls education'..."/>
+      <input type="text" id="search-input" placeholder="Search — 'clean water', 'education'..."/>
       <button class="search-btn" onclick="filterProjects()">Search</button>
     </div>
     <div class="filter-tags">
@@ -420,7 +545,7 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
   <section class="projects-section" id="projects-anchor">
     <div class="section-header">
       <div class="section-title">Featured projects</div>
-      <span class="see-all">See all projects →</span>
+      <span class="see-all">See all →</span>
     </div>
     <div class="projects-grid" id="projects-grid"></div>
   </section>
@@ -429,20 +554,20 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
     <h2>Our collective impact</h2>
     <p>Together, donors like you have transformed communities across the globe.</p>
     <div class="impact-grid">
-      <div><div class="impact-num">$2.4B</div><div class="impact-lbl">Total funds raised</div></div>
+      <div><div class="impact-num">$2.4B</div><div class="impact-lbl">Total raised</div></div>
       <div><div class="impact-num">32M</div><div class="impact-lbl">People helped</div></div>
-      <div><div class="impact-num">120+</div><div class="impact-lbl">Countries reached</div></div>
-      <div><div class="impact-num">4,200+</div><div class="impact-lbl">Partner nonprofits</div></div>
+      <div><div class="impact-num">120+</div><div class="impact-lbl">Countries</div></div>
+      <div><div class="impact-num">4,200+</div><div class="impact-lbl">Nonprofits</div></div>
     </div>
   </section>
 
   <section class="how-section">
     <div class="section-title" style="text-align:center">How HopeFoundation works</div>
     <div class="how-grid">
-      <div class="how-step"><div class="step-icon" style="background:var(--green-50)">🔍</div><h3>Discover a cause</h3><p>Search thousands of verified projects aligned with your values — from local to global.</p></div>
-      <div class="how-step"><div class="step-icon" style="background:var(--teal-50)">💳</div><h3>Make a donation</h3><p>Give securely with your card, bank transfer, or crypto. One-time or monthly giving.</p></div>
-      <div class="how-step"><div class="step-icon" style="background:var(--amber-50)">📊</div><h3>Track your impact</h3><p>Every project sends updates and reports. See exactly how your money was used.</p></div>
-      <div class="how-step"><div class="step-icon" style="background:var(--coral-50)">🌍</div><h3>Grow the movement</h3><p>Share projects you love and inspire others. Small ripples create big waves of change.</p></div>
+      <div class="how-step"><div class="step-icon" style="background:var(--green-50)">🔍</div><h3>Discover a cause</h3><p>Search thousands of verified projects aligned with your values.</p></div>
+      <div class="how-step"><div class="step-icon" style="background:var(--teal-50)">💳</div><h3>Make a donation</h3><p>Give securely with card, bank transfer, or crypto. One-time or monthly.</p></div>
+      <div class="how-step"><div class="step-icon" style="background:var(--amber-50)">📊</div><h3>Track your impact</h3><p>Every project sends updates so you see exactly how your money helps.</p></div>
+      <div class="how-step"><div class="step-icon" style="background:var(--coral-50)">🌍</div><h3>Grow the movement</h3><p>Share projects you love and inspire others. Small ripples make big waves.</p></div>
     </div>
   </section>
 
@@ -467,24 +592,21 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
 
       
     </div>
-
     <div class="footer-copy">© 2024 HopeFoundation. All rights reserved.</div>
   </footer>
 </div>
 
-<!-- ════════════════════════════════════
-     PAGE 2 – PROJECT DETAIL
-════════════════════════════════════ -->
+<!-- ═══ PAGE 2 – PROJECT DETAIL ═══ -->
 <div class="page" id="page-detail">
   <div class="detail-layout">
     <div>
-      <div class="breadcrumb">Projects › <span onclick="goTo('landing')">Clean Water</span> › Safe Drinking Water for 3 Villages</div>
-      <div class="badge badge-teal" style="margin-bottom:14px">💧 Clean Water</div>
-      <h1 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--text-dark);line-height:1.2;margin-bottom:14px">Safe Drinking Water for 3 Villages in Ghana</h1>
+      <div class="breadcrumb">Projects › <span onclick="goTo('landing')">Clean Water</span> › Safe Drinking Water</div>
+      <div class="badge badge-teal" style="margin-bottom:12px">💧 Clean Water</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--text-dark);line-height:1.2;margin-bottom:12px">Safe Drinking Water for 3 Villages in Ghana</h1>
       <div class="org-row">
         <div class="org-av">CW</div>
         <div class="org-name-text">by <strong>CleanWater Initiative</strong></div>
-        <div class="verified-badge">✓ Verified nonprofit</div>
+        <div class="verified-badge">✓ Verified</div>
       </div>
       <div class="proj-hero-img">💧</div>
       <div class="tabs">
@@ -494,21 +616,21 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
       </div>
       <div class="tab-panel active" id="dtab-about">
         <p class="about-text">Over 1.2 million people in rural Ghana lack access to clean drinking water. Contaminated sources cause preventable deaths, keep children out of school, and trap communities in cycles of poverty.</p>
-        <p class="about-text">This project will drill two boreholes and install modern filtration systems across three villages — Kpetoe, Asikuma, and Dome — giving 3,400 people safe water for generations. Your donation funds drilling equipment, trained local engineers, and a 5-year maintenance program run by elected community water committees.</p>
-        <div style="font-size:14px;font-weight:500;color:var(--text-dark);margin:16px 0 10px">Project milestones</div>
+        <p class="about-text">This project will drill two boreholes and install modern filtration systems across three villages — giving 3,400 people safe water for generations.</p>
+        <div style="font-size:14px;font-weight:500;color:var(--text-dark);margin:14px 0 8px">Project milestones</div>
         <ul class="milestone-list">
-          <li><div class="ms-dot ms-done">✓</div><div><strong>Site surveys completed</strong> — Geological surveys confirmed borehole locations in all 3 villages.</div></li>
-          <li><div class="ms-dot ms-done">✓</div><div><strong>Community water committees formed</strong> — 15 elected members trained in management and maintenance.</div></li>
-          <li><div class="ms-dot ms-done">✓</div><div><strong>Borehole drilling — Kpetoe village</strong> — First borehole operational, serving 1,100 people.</div></li>
-          <li><div class="ms-dot ms-pending">○</div><div><strong>Borehole drilling — Asikuma village</strong> — Scheduled to begin once 70% funding is reached.</div></li>
-          <li><div class="ms-dot ms-pending">○</div><div><strong>Borehole drilling — Dome village</strong> — Final installation, pending full funding.</div></li>
-          <li><div class="ms-dot ms-pending">○</div><div><strong>Filtration systems + handwashing stations</strong> — Full hygiene infrastructure for all sites.</div></li>
+          <li><div class="ms-dot ms-done">✓</div><div><strong>Site surveys completed</strong> — Geological surveys confirmed all 3 villages.</div></li>
+          <li><div class="ms-dot ms-done">✓</div><div><strong>Water committees formed</strong> — 15 elected members trained.</div></li>
+          <li><div class="ms-dot ms-done">✓</div><div><strong>Borehole — Kpetoe village</strong> — Operational, serving 1,100 people.</div></li>
+          <li><div class="ms-dot ms-pending">○</div><div><strong>Borehole — Asikuma village</strong> — Begins at 70% funding.</div></li>
+          <li><div class="ms-dot ms-pending">○</div><div><strong>Borehole — Dome village</strong> — Pending full funding.</div></li>
+          <li><div class="ms-dot ms-pending">○</div><div><strong>Filtration + handwashing stations</strong> — Full hygiene infrastructure.</div></li>
         </ul>
       </div>
       <div class="tab-panel" id="dtab-updates">
-        <div class="update-item"><div class="update-date">May 14, 2024</div><div class="update-title">🎉 Kpetoe borehole is now operational!</div><div class="update-body">The first borehole in Kpetoe village has been completed and is fully operational. Over 1,100 residents now have access to clean, safe drinking water — many for the first time in their lives.</div></div>
-        <div class="update-item"><div class="update-date">March 28, 2024</div><div class="update-title">Drilling equipment arrives on site</div><div class="update-body">Our drilling rig and equipment arrived safely in Kpetoe after a 3-day journey. The local engineering crew is assembled and drilling begins Monday.</div></div>
-        <div class="update-item"><div class="update-date">February 10, 2024</div><div class="update-title">Water committees elected and trained</div><div class="update-body">Community members in all three villages elected their water management committees. 15 committee members learned basic maintenance, record-keeping, and how to manage long-term upkeep.</div></div>
+        <div class="update-item"><div class="update-date">May 14, 2024</div><div class="update-title">🎉 Kpetoe borehole is now operational!</div><div class="update-body">The first borehole has been completed. Over 1,100 residents now have access to clean, safe drinking water — many for the first time in their lives.</div></div>
+        <div class="update-item"><div class="update-date">March 28, 2024</div><div class="update-title">Drilling equipment arrives on site</div><div class="update-body">Our drilling rig arrived safely in Kpetoe. The local engineering crew is assembled and drilling begins Monday.</div></div>
+        <div class="update-item"><div class="update-date">February 10, 2024</div><div class="update-title">Water committees elected and trained</div><div class="update-body">Community members in all three villages elected their water management committees and completed training.</div></div>
       </div>
       <div class="tab-panel" id="dtab-donors">
         <ul id="detail-donors-list" style="list-style:none"></ul>
@@ -518,9 +640,9 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
       <div class="donate-card">
         <div class="raised-big">$31,200</div>
         <div class="raised-of">raised of $40,000 goal</div>
-        <div class="prog-bg2"><div class="prog-fill2" id="detail-prog" style="width:78%"></div></div>
+        <div class="prog-bg2"><div class="prog-fill2" style="width:78%"></div></div>
         <div class="prog-stats"><span><strong>284</strong> donors</span><span><strong>22%</strong> to go</span><span><strong>41 days</strong> left</span></div>
-        <div class="success-note" id="detail-success">🎉 Thank you for your donation!</div>
+        <div class="success-note" id="detail-success">🎉 Thank you!</div>
         <div class="amt-grid2">
           <button class="amt2" onclick="pickDetailAmt(10,this)">$10</button>
           <button class="amt2 sel" onclick="pickDetailAmt(25,this)">$25</button>
@@ -534,9 +656,9 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
         <button class="share-btn">↗ Share this project</button>
       </div>
       <div class="org-info-card">
-        <div class="section-label" style="margin-bottom:12px">About the nonprofit</div>
-        <div style="font-size:15px;font-weight:500;color:var(--text-dark);margin-bottom:4px;cursor:pointer" onclick="goTo('nonprofit')">CleanWater Initiative</div>
-        <div style="font-size:13px;color:var(--text-faint);margin-bottom:12px">📍 Accra, Ghana · Est. 2011</div>
+        <div class="section-label" style="margin-bottom:10px">About the nonprofit</div>
+        <div style="font-size:15px;font-weight:500;color:var(--text-dark);margin-bottom:3px;cursor:pointer" onclick="goTo('nonprofit')">CleanWater Initiative</div>
+        <div style="font-size:13px;color:var(--text-faint);margin-bottom:10px">📍 Accra, Ghana · Est. 2011</div>
         <div class="org-info-row"><span>Projects funded</span><span>47</span></div>
         <div class="org-info-row"><span>People reached</span><span>128,000+</span></div>
         <div class="org-info-row"><span>Countries active</span><span>8</span></div>
@@ -546,9 +668,7 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
   </div>
 </div>
 
-<!-- ════════════════════════════════════
-     PAGE 3 – NONPROFIT PROFILE
-════════════════════════════════════ -->
+<!-- ═══ PAGE 3 – NONPROFIT PROFILE ═══ -->
 <div class="page" id="page-nonprofit">
   <div class="hero-band">
     <div class="hero-band-inner">
@@ -556,16 +676,16 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
       <div class="hero-band-text">
         <div class="org-page-title">CleanWater Initiative</div>
         <div class="org-meta-row">
-          <span>📍 Accra, Ghana</span><span>🗓 Est. 2011</span><span>🌍 8 countries</span><span>💧 Water & Sanitation</span>
+          <span>📍 Accra, Ghana</span><span>🗓 Est. 2011</span><span>🌍 8 countries</span>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <span class="badge badge-green">✓ Verified nonprofit</span>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <span class="badge badge-green">✓ Verified</span>
           <span class="badge badge-teal">⭐ Top-rated 2024</span>
           <span class="badge badge-amber">🏆 GuideStar Gold</span>
         </div>
       </div>
       <div class="hero-band-actions">
-        <button class="btn-primary btn-sm" onclick="openModal('CleanWater Initiative')">Donate to this org</button>
+        <button class="btn-primary btn-sm" onclick="openModal('CleanWater Initiative')">Donate</button>
         <button class="btn-outline btn-sm" id="np-follow-btn" onclick="toggleNpFollow()">+ Follow</button>
       </div>
     </div>
@@ -574,7 +694,7 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
     <div class="profile-nav-inner">
       <div class="ptab active" onclick="showProfileTab('overview',this)">Overview</div>
       <div class="ptab" onclick="showProfileTab('projects',this)">Projects (47)</div>
-      <div class="ptab" onclick="showProfileTab('team',this)">Our team</div>
+      <div class="ptab" onclick="showProfileTab('team',this)">Team</div>
       <div class="ptab" onclick="showProfileTab('financials',this)">Financials</div>
     </div>
   </div>
@@ -584,13 +704,13 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
         <div class="stats-row">
           <div class="stat-box"><div class="stat-box-num">$4.2M</div><div class="stat-box-lbl">Total raised</div></div>
           <div class="stat-box"><div class="stat-box-num">128K</div><div class="stat-box-lbl">People reached</div></div>
-          <div class="stat-box"><div class="stat-box-num">47</div><div class="stat-box-lbl">Projects funded</div></div>
-          <div class="stat-box"><div class="stat-box-num">8</div><div class="stat-box-lbl">Countries active</div></div>
+          <div class="stat-box"><div class="stat-box-num">47</div><div class="stat-box-lbl">Projects</div></div>
+          <div class="stat-box"><div class="stat-box-num">8</div><div class="stat-box-lbl">Countries</div></div>
         </div>
         <div class="section-label">Our mission</div>
         <p class="about-text">CleanWater Initiative exists to end the water crisis — one borehole, one filtration system, one community at a time. Founded in 2011 by engineers and public health professionals, we've delivered clean water to over 128,000 people across Sub-Saharan Africa and Southeast Asia.</p>
-        <p class="about-text">We don't just build infrastructure — we build lasting capacity. Every project includes elected community water committees, maintenance training, and a 5-year support program to ensure nothing breaks down.</p>
-        <div class="section-label" style="margin-top:22px">Recent projects</div>
+        <p class="about-text">Every project includes elected community water committees, maintenance training, and a 5-year support program to ensure lasting results.</p>
+        <div class="section-label" style="margin-top:20px">Recent projects</div>
         <div class="proj-card" onclick="goTo('detail')">
           <div class="proj-icon" style="background:var(--teal-50)">💧</div>
           <div class="proj-info">
@@ -606,60 +726,58 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
             <span class="proj-cat" style="background:var(--green-100);color:var(--green-700)">Completed</span>
             <div class="proj-name">Sanitation stations for 5 rural schools, Uganda</div>
             <div class="proj-pg-bg"><div class="proj-pg-fill" style="width:100%"></div></div>
-            <div class="proj-pg-row"><strong>$22,000 raised</strong><span>100% funded ✓</span></div>
+            <div class="proj-pg-row"><strong>$22,000 raised</strong><span>100% ✓</span></div>
           </div>
         </div>
       </div>
-      <div class="tab-panel" id="ptab-projects">
-        <div id="np-projects-list"></div>
-      </div>
+      <div class="tab-panel" id="ptab-projects"><div id="np-projects-list"></div></div>
       <div class="tab-panel" id="ptab-team">
         <div class="section-label">Leadership team</div>
         <div class="team-grid">
-          <div class="team-card"><div class="team-av" style="background:var(--green-50);color:var(--green-700)">AK</div><div class="team-name">Ama Korsah</div><div class="team-role">Executive Director</div></div>
-          <div class="team-card"><div class="team-av" style="background:var(--teal-50);color:var(--teal-800)">KO</div><div class="team-name">Kwame Owusu</div><div class="team-role">Head of Engineering</div></div>
-          <div class="team-card"><div class="team-av" style="background:var(--amber-50);color:var(--amber-800)">LM</div><div class="team-name">Lydia Mensah</div><div class="team-role">Community Programs</div></div>
-          <div class="team-card"><div class="team-av" style="background:var(--coral-50);color:var(--coral-800)">FB</div><div class="team-name">Felix Boateng</div><div class="team-role">Finance Director</div></div>
-          <div class="team-card"><div class="team-av" style="background:var(--green-50);color:var(--green-700)">SA</div><div class="team-name">Sandra Asare</div><div class="team-role">Partnerships Lead</div></div>
-          <div class="team-card"><div class="team-av" style="background:var(--teal-50);color:var(--teal-800)">JN</div><div class="team-name">James Nkrumah</div><div class="team-role">Field Operations</div></div>
+          <div class="team-card"><div class="team-av" style="background:var(--green-50);color:var(--green-700)">AK</div><div class="team-name">Ama Korsah</div><div class="team-role">Exec. Director</div></div>
+          <div class="team-card"><div class="team-av" style="background:var(--teal-50);color:var(--teal-800)">KO</div><div class="team-name">Kwame Owusu</div><div class="team-role">Engineering</div></div>
+          <div class="team-card"><div class="team-av" style="background:var(--amber-50);color:var(--amber-800)">LM</div><div class="team-name">Lydia Mensah</div><div class="team-role">Community</div></div>
+          <div class="team-card"><div class="team-av" style="background:var(--coral-50);color:var(--coral-800)">FB</div><div class="team-name">Felix Boateng</div><div class="team-role">Finance</div></div>
+          <div class="team-card"><div class="team-av" style="background:var(--green-50);color:var(--green-700)">SA</div><div class="team-name">Sandra Asare</div><div class="team-role">Partnerships</div></div>
+          <div class="team-card"><div class="team-av" style="background:var(--teal-50);color:var(--teal-800)">JN</div><div class="team-name">James Nkrumah</div><div class="team-role">Field Ops</div></div>
         </div>
       </div>
       <div class="tab-panel" id="ptab-financials">
         <div class="section-label">2023 financial summary</div>
         <div class="stats-row" style="grid-template-columns:repeat(3,1fr)">
-          <div class="stat-box"><div class="stat-box-num">$1.8M</div><div class="stat-box-lbl">Total revenue</div></div>
+          <div class="stat-box"><div class="stat-box-num">$1.8M</div><div class="stat-box-lbl">Revenue</div></div>
           <div class="stat-box"><div class="stat-box-num">91.8%</div><div class="stat-box-lbl">To programs</div></div>
           <div class="stat-box"><div class="stat-box-num">8.2%</div><div class="stat-box-lbl">Overhead</div></div>
         </div>
-        <p class="about-text">CleanWater Initiative maintains one of the lowest overhead rates in the sector at just 8.2%. Every dollar you donate puts $0.92 directly into water infrastructure, community training, and long-term maintenance programs.</p>
-        <p class="about-text">We publish full audited financial statements annually. Our 2023 audit was conducted by PricewaterhouseCoopers Ghana.</p>
+        <p class="about-text">CleanWater Initiative maintains one of the lowest overhead rates in the sector at just 8.2%. Every dollar you donate puts $0.92 directly into water infrastructure and community programs.</p>
+        <p class="about-text">Full audited financial statements are published annually. Our 2023 audit was conducted by PricewaterhouseCoopers Ghana.</p>
       </div>
     </div>
     <div>
-      <div class="info-card" style="margin-bottom:14px">
-        <div class="section-label" style="margin-bottom:12px">Organization info</div>
+      <div class="info-card">
+        <div class="section-label" style="margin-bottom:10px">Organization info</div>
         <div class="info-row"><span>Registration</span><span>CW-NGO-2011-GH</span></div>
-        <div class="info-row"><span>501(c)(3) status</span><span style="color:var(--green-600)">Active</span></div>
-        <div class="info-row"><span>Primary focus</span><span>Clean Water</span></div>
-        <div class="info-row"><span>Operating since</span><span>2011</span></div>
-        <div class="info-row"><span>Active countries</span><span>8</span></div>
-        <div class="info-row"><span>Overhead rate</span><span style="color:var(--green-600)">8.2%</span></div>
+        <div class="info-row"><span>501(c)(3)</span><span style="color:var(--green-600)">Active</span></div>
+        <div class="info-row"><span>Focus</span><span>Clean Water</span></div>
+        <div class="info-row"><span>Since</span><span>2011</span></div>
+        <div class="info-row"><span>Countries</span><span>8</span></div>
+        <div class="info-row"><span>Overhead</span><span style="color:var(--green-600)">8.2%</span></div>
       </div>
       <div class="info-card">
         <div style="text-align:center;padding:4px 0 0">
           <div class="trust-ring">
-            <svg width="80" height="80" viewBox="0 0 80 80">
-              <circle cx="40" cy="40" r="32" fill="none" stroke="#F1EFE8" stroke-width="8"/>
-              <circle cx="40" cy="40" r="32" fill="none" stroke="#3B6D11" stroke-width="8" stroke-dasharray="201" stroke-dashoffset="20" stroke-linecap="round"/>
+            <svg width="76" height="76" viewBox="0 0 76 76">
+              <circle cx="38" cy="38" r="30" fill="none" stroke="#F1EFE8" stroke-width="8"/>
+              <circle cx="38" cy="38" r="30" fill="none" stroke="#3B6D11" stroke-width="8" stroke-dasharray="188" stroke-dashoffset="19" stroke-linecap="round"/>
             </svg>
             <div class="trust-val">97</div>
           </div>
           <div class="section-label" style="margin-bottom:0">Trust score</div>
         </div>
-        <ul class="trust-items" style="margin-top:14px">
-          <li>Verified registration documents</li>
+        <ul class="trust-items" style="margin-top:12px">
+          <li>Verified registration</li>
           <li>Annual independent audit</li>
-          <li>Project updates published</li>
+          <li>Regular project updates</li>
           <li>Financial transparency A+</li>
           <li>Zero fraud complaints</li>
         </ul>
@@ -668,19 +786,17 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
   </div>
 </div>
 
-<!-- ════════════════════════════════════
-     PAGE 4 – DONOR DASHBOARD
-════════════════════════════════════ -->
+<!-- ═══ PAGE 4 – DONOR DASHBOARD ═══ -->
 <div class="page" id="page-dashboard">
   <div class="dashboard-layout">
     <div class="dash-sidebar">
-      <div style="padding:0 8px 12px">
+      <div style="padding:0 8px 10px">
         <div class="dash-sb-label">Menu</div>
         <div class="dash-sb-item active" onclick="showDashPanel('overview',this)"><span class="dash-sb-icon">🏠</span>Overview</div>
-        <div class="dash-sb-item" onclick="showDashPanel('history',this)"><span class="dash-sb-icon">📋</span>Donation history</div>
+        <div class="dash-sb-item" onclick="showDashPanel('history',this)"><span class="dash-sb-icon">📋</span>History</div>
         <div class="dash-sb-item" onclick="showDashPanel('impact',this)"><span class="dash-sb-icon">🌍</span>My impact</div>
         <div class="dash-sb-item" onclick="showDashPanel('following',this)"><span class="dash-sb-icon">❤️</span>Following<span class="dash-sb-badge">6</span></div>
-        <div class="dash-sb-item" onclick="showDashPanel('tax',this)"><span class="dash-sb-icon">📄</span>Tax receipts</div>
+        <div class="dash-sb-item" onclick="showDashPanel('tax',this)"><span class="dash-sb-icon">📄</span>Receipts</div>
       </div>
       <div style="padding:0 8px">
         <div class="dash-sb-label">Account</div>
@@ -688,79 +804,88 @@ footer{background:var(--green-800);color:var(--teal-100);padding:36px 5%;display
         <div class="dash-sb-item"><span class="dash-sb-icon">🔔</span>Notifications</div>
       </div>
       <div class="dash-sb-user">
-        <div class="av">JA</div>
-        <div><div class="dash-sb-name">James Adeyemi</div><div class="dash-sb-since">Donor since 2021</div></div>
+        <div class="av">Do</div>
+        <div><div class="dash-sb-name">donor</div><div class="dash-sb-since">Donor since 2021</div></div>
       </div>
     </div>
-    <div class="dash-main">
 
+    <div class="dash-main">
       <div class="dash-panel active" id="dpanel-overview">
-        <div class="dash-page-title">Welcome back, James 👋</div>
-        <div class="dash-page-sub">Here's a summary of your giving this year.</div>
+        <div class="dash-page-title">Welcome back, donor 👋</div>
+        <div class="dash-page-sub">Your giving summary for this year.</div>
         <div class="metrics-row">
           <div class="metric"><div class="metric-lbl">Total donated</div><div class="metric-val">$1,840</div><div class="metric-delta">↑ $340 vs last year</div></div>
-          <div class="metric"><div class="metric-lbl">Projects supported</div><div class="metric-val">14</div><div class="metric-delta">↑ 3 new this year</div></div>
+          <div class="metric"><div class="metric-lbl">Projects</div><div class="metric-val">14</div><div class="metric-delta">↑ 3 new this year</div></div>
           <div class="metric"><div class="metric-lbl">Giving streak</div><div class="metric-val">8 mo</div><div class="metric-delta">Personal best 🎉</div></div>
           <div class="metric"><div class="metric-lbl">Monthly giving</div><div class="metric-val">$75</div><div class="metric-delta">2 active plans</div></div>
         </div>
         <div class="two-col-dash">
           <div class="card">
-            <div class="card-title">Monthly giving history</div>
+            <div class="card-title">Monthly giving</div>
             <div class="bar-chart-wrap" id="dash-chart"></div>
-            <div style="display:flex;justify-content:space-between;font-size:10px;color:#B4B2A9" id="dash-chart-labels"></div>
+            <div style="display:flex;justify-content:space-between;font-size:10px;color:#B4B2A9;margin-top:4px" id="dash-chart-labels"></div>
           </div>
           <div class="card">
-            <div class="card-title">Causes I support</div>
+            <div class="card-title">Causes</div>
             <div id="causes-list"></div>
           </div>
         </div>
         <div class="card">
-          <div class="card-title">Recent donations <a onclick="showDashPanel('history',document.querySelector('.dash-sb-item:nth-child(2)'))">View all →</a></div>
+          <div class="card-title">Recent donations <a onclick="showDashPanel('history',null)">View all →</a></div>
           <div id="recent-donations"></div>
         </div>
       </div>
 
       <div class="dash-panel" id="dpanel-history">
         <div class="dash-page-title">Donation history</div>
-        <div class="dash-page-sub">All your contributions, organized by date.</div>
+        <div class="dash-page-sub">All your contributions.</div>
         <div class="card"><div id="all-donations"></div></div>
       </div>
 
       <div class="dash-panel" id="dpanel-impact">
         <div class="dash-page-title">My impact</div>
-        <div class="dash-page-sub">What your donations have made possible — in real terms.</div>
+        <div class="dash-page-sub">What your donations have made possible.</div>
         <div class="cert-banner">
           <div class="cert-title">🌍 Your giving has touched 3 continents</div>
           <div class="cert-sub">You've supported 14 projects across Africa, Asia, and Latin America.</div>
-          <button class="btn-primary btn-sm">Download impact certificate</button>
+          <button class="btn-primary btn-sm">Download certificate</button>
         </div>
         <div class="impact-cards">
-          <div class="impact-card"><div class="impact-emoji">💧</div><div class="impact-num">840</div><div class="impact-desc">People now have clean water access</div></div>
-          <div class="impact-card"><div class="impact-emoji">📚</div><div class="impact-num">120</div><div class="impact-desc">Children received school supplies</div></div>
-          <div class="impact-card"><div class="impact-emoji">🌱</div><div class="impact-num">2,400</div><div class="impact-desc">Trees planted in the Sahel</div></div>
-          <div class="impact-card"><div class="impact-emoji">🏥</div><div class="impact-num">340</div><div class="impact-desc">Patients received health screenings</div></div>
-          <div class="impact-card"><div class="impact-emoji">🌾</div><div class="impact-num">18</div><div class="impact-desc">Families reached food security</div></div>
-          <div class="impact-card"><div class="impact-emoji">🏠</div><div class="impact-num">12</div><div class="impact-desc">Families received emergency shelter</div></div>
+          <div class="impact-card"><div class="impact-emoji">💧</div><div class="impact-num">840</div><div class="impact-desc">People with clean water</div></div>
+          <div class="impact-card"><div class="impact-emoji">📚</div><div class="impact-num">120</div><div class="impact-desc">Children with school supplies</div></div>
+          <div class="impact-card"><div class="impact-emoji">🌱</div><div class="impact-num">2,400</div><div class="impact-desc">Trees planted</div></div>
+          <div class="impact-card"><div class="impact-emoji">🏥</div><div class="impact-num">340</div><div class="impact-desc">Health screenings</div></div>
+          <div class="impact-card"><div class="impact-emoji">🌾</div><div class="impact-num">18</div><div class="impact-desc">Families food-secure</div></div>
+          <div class="impact-card"><div class="impact-emoji">🏠</div><div class="impact-num">12</div><div class="impact-desc">Emergency shelters</div></div>
         </div>
       </div>
 
       <div class="dash-panel" id="dpanel-following">
         <div class="dash-page-title">Nonprofits I follow</div>
-        <div class="dash-page-sub">Stay updated on the organizations you care about.</div>
+        <div class="dash-page-sub">Stay updated on causes you care about.</div>
         <div class="follow-card-grid" id="following-grid"></div>
       </div>
 
       <div class="dash-panel" id="dpanel-tax">
         <div class="dash-page-title">Tax receipts</div>
-        <div class="dash-page-sub">Download official tax receipts for your donations.</div>
+        <div class="dash-page-sub">Download official receipts for your donations.</div>
         <div class="card">
-          <div class="card-title">Annual receipts</div>
-          <div class="history-item"><div class="h-icon" style="background:var(--green-50)">📄</div><div class="h-info"><div class="h-name">2024 annual giving receipt</div><div class="h-org">14 donations · $1,840 total</div></div><div class="h-right"><button class="btn-primary btn-sm">Download PDF</button></div></div>
-          <div class="history-item"><div class="h-icon" style="background:var(--gray-50)">📄</div><div class="h-info"><div class="h-name">2023 annual giving receipt</div><div class="h-org">11 donations · $1,500 total</div></div><div class="h-right"><button class="btn-ghost btn-sm">Download PDF</button></div></div>
-          <div class="history-item"><div class="h-icon" style="background:var(--gray-50)">📄</div><div class="h-info"><div class="h-name">2022 annual giving receipt</div><div class="h-org">8 donations · $980 total</div></div><div class="h-right"><button class="btn-ghost btn-sm">Download PDF</button></div></div>
+          <div class="history-item"><div class="h-icon" style="background:var(--green-50)">📄</div><div class="h-info"><div class="h-name">2024 annual receipt</div><div class="h-org">14 donations · $1,840</div></div><div class="h-right"><button class="btn-primary btn-sm">Download</button></div></div>
+          <div class="history-item"><div class="h-icon" style="background:var(--gray-50)">📄</div><div class="h-info"><div class="h-name">2023 annual receipt</div><div class="h-org">11 donations · $1,500</div></div><div class="h-right"><button class="btn-ghost btn-sm">Download</button></div></div>
+          <div class="history-item"><div class="h-icon" style="background:var(--gray-50)">📄</div><div class="h-info"><div class="h-name">2022 annual receipt</div><div class="h-org">8 donations · $980</div></div><div class="h-right"><button class="btn-ghost btn-sm">Download</button></div></div>
         </div>
       </div>
+    </div>
+  </div>
 
+  <!-- Mobile bottom nav for dashboard -->
+  <div class="dash-bottom-nav">
+    <div class="dash-bottom-nav-inner">
+      <button class="dbn-item active" id="dbn-overview" onclick="showDashPanel('overview',null);setDbn('overview')"><span>🏠</span><span>Overview</span></button>
+      <button class="dbn-item" id="dbn-history" onclick="showDashPanel('history',null);setDbn('history')"><span>📋</span><span>History</span></button>
+      <button class="dbn-item" id="dbn-impact" onclick="showDashPanel('impact',null);setDbn('impact')"><span>🌍</span><span>Impact</span></button>
+      <button class="dbn-item" id="dbn-following" onclick="showDashPanel('following',null);setDbn('following')"><span>❤️</span><span>Following</span></button>
+      <button class="dbn-item" id="dbn-tax" onclick="showDashPanel('tax',null);setDbn('tax')"><span>📄</span><span>Receipts</span></button>
     </div>
   </div>
 </div>
@@ -794,9 +919,8 @@ const projects=[
   {id:3,emoji:'🌱',bg:'#FAEEDA',category:'Environment',org:'Regreen the Earth',title:'Plant 50,000 Trees Across the Sahel',desc:'Combating desertification with community-led reforestation and sustainable farming.',raised:9800,goal:20000,catBg:'#FAC775',catColor:'#633806'},
   {id:4,emoji:'🏥',bg:'#FAECE7',category:'Health',org:'MedReach Global',title:'Mobile Clinics for Remote Communities',desc:'Bringing medical screenings, vaccines, and maternal health care to areas with no hospitals.',raised:44500,goal:50000,catBg:'#F5C4B3',catColor:'#712B13'},
   {id:5,emoji:'🌾',bg:'#EAF3DE',category:'Food',org:'Harvest Hope Kenya',title:'Empower 200 Smallholder Farmers',desc:'Training in drought-resistant crops and providing seeds to help families achieve food security.',raised:7200,goal:15000,catBg:'#C0DD97',catColor:'#27500A'},
-  {id:6,emoji:'🆘',bg:'#E1F5EE',category:'Disaster',org:'Global Relief Corps',title:'Emergency Shelter After the Floods',desc:'Temporary housing and food supplies for 1,200 families displaced by recent flooding.',raised:62000,goal:70000,catBg:'#9FE1CB',catColor:'#085041'},
+  {id:6,emoji:'🆘',bg:'#E1F5EE',category:'Disaster',org:'Global Relief Corps',title:'Emergency Shelter After the Floods',desc:'Temporary housing and food for 1,200 families displaced by recent flooding.',raised:62000,goal:70000,catBg:'#9FE1CB',catColor:'#085041'},
 ];
-
 const donations=[
   {icon:'💧',bg:'#E1F5EE',name:'Safe drinking water for 3 villages in Ghana',org:'CleanWater Initiative',amt:100,date:'May 22, 2024',type:'one-time'},
   {icon:'📚',bg:'#EAF3DE',name:'Books & classrooms for 500 rural girls',org:'Educate Africa Foundation',amt:75,date:'May 1, 2024',type:'monthly'},
@@ -807,7 +931,6 @@ const donations=[
   {icon:'🆘',bg:'#E1F5EE',name:'Emergency shelter after the floods',org:'Global Relief Corps',amt:150,date:'Feb 14, 2024',type:'one-time'},
   {icon:'📚',bg:'#EAF3DE',name:'Tech skills for youth, Lagos Nigeria',org:'Educate Africa Foundation',amt:75,date:'Feb 1, 2024',type:'monthly'},
 ];
-
 const detailDonors=[
   {name:'Sarah M.',time:'2 hours ago',amt:100,bg:'#EAF3DE',c:'#27500A'},
   {name:'Anonymous',time:'5 hours ago',amt:25,bg:'#E1F5EE',c:'#085041'},
@@ -816,15 +939,13 @@ const detailDonors=[
   {name:'David O.',time:'3 days ago',amt:100,bg:'#EAF3DE',c:'#27500A'},
   {name:'Fatima A.',time:'4 days ago',amt:500,bg:'#E1F5EE',c:'#085041'},
 ];
-
 const npProjects=[
   {icon:'💧',bg:'#E1F5EE',cat:'Active',catBg:'#9FE1CB',catColor:'#085041',name:'Safe drinking water for 3 villages in Ghana',pct:78,raised:'$31,200',goal:'$40,000'},
   {icon:'🚿',bg:'#EAF3DE',cat:'Completed',catBg:'#C0DD97',catColor:'#27500A',name:'Sanitation stations for 5 rural schools, Uganda',pct:100,raised:'$22,000',goal:'$22,000'},
-  {icon:'💧',bg:'#E1F5EE',cat:'Active',catBg:'#9FE1CB',catColor:'#085041',name:'Emergency water relief after flooding, Mozambique',pct:45,raised:'$13,500',goal:'$30,000'},
-  {icon:'🏗',bg:'#FAEEDA',cat:'Planning',catBg:'#FAC775',catColor:'#633806',name:'Community reservoir construction, Northern Nigeria',pct:12,raised:'$4,800',goal:'$40,000'},
+  {icon:'💧',bg:'#E1F5EE',cat:'Active',catBg:'#9FE1CB',catColor:'#085041',name:'Emergency water relief, Mozambique',pct:45,raised:'$13,500',goal:'$30,000'},
+  {icon:'🏗',bg:'#FAEEDA',cat:'Planning',catBg:'#FAC775',catColor:'#633806',name:'Community reservoir, Northern Nigeria',pct:12,raised:'$4,800',goal:'$40,000'},
   {icon:'🚿',bg:'#EAF3DE',cat:'Completed',catBg:'#C0DD97',catColor:'#27500A',name:'Hygiene education for 2,000 children, Zambia',pct:100,raised:'$8,400',goal:'$8,400'},
 ];
-
 const followOrgs=[
   {i:'CW',bg:'#EAF3DE',c:'#27500A',name:'CleanWater Initiative',cat:'Clean Water'},
   {i:'EA',bg:'#E1F5EE',c:'#085041',name:'Educate Africa Foundation',cat:'Education'},
@@ -842,8 +963,12 @@ function goTo(page){
     const el=document.getElementById('nav-content-'+p);
     if(el)el.style.display=(p===page)?'flex':'none';
   });
+  // Show/hide hamburger & mobile menu
+  document.getElementById('mob-menu').classList.remove('open');
   window.scrollTo(0,0);
 }
+function toggleMob(){document.getElementById('mob-menu').classList.toggle('open')}
+function closeMob(){document.getElementById('mob-menu').classList.remove('open')}
 
 /* ── LANDING ── */
 let activeCategory='all';
@@ -862,7 +987,7 @@ function renderProjects(list){
         <div class="card-name">${p.title}</div>
         <div class="card-desc">${p.desc}</div>
         <div class="prog-bg"><div class="prog-fill" style="width:${pct}%"></div></div>
-        <div class="card-meta"><span class="raised">$${p.raised.toLocaleString()} raised</span><span class="goal">${pct}% of $${Math.round(p.goal/1000)}k</span></div>
+        <div class="card-meta"><span class="raised">$${p.raised.toLocaleString()} raised</span><span class="goal-text">${pct}% of $${Math.round(p.goal/1000)}k</span></div>
         <button class="donate-btn" onclick="event.stopPropagation();openModal('${p.title.replace(/'/g,'')}')">Donate to this project</button>
       </div>
     </div>`;
@@ -893,8 +1018,8 @@ function openModal(name){
   document.getElementById('modal-btn').textContent='Donate $25 →';
   document.getElementById('modal-custom').value='';
 }
-function closeModal(){document.getElementById('modal-overlay').classList.remove('open');}
-function handleOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open')}
+function handleOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal()}
 function selectAmt(a,btn){
   selAmt=a;
   document.querySelectorAll('.amt-btn').forEach(b=>b.classList.remove('sel'));
@@ -963,7 +1088,7 @@ function detailDonate(){
   },1400);
 }
 
-/* ── NONPROFIT PROFILE ── */
+/* ── NONPROFIT ── */
 function showProfileTab(id,el){
   document.querySelectorAll('#page-nonprofit .tab-panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
@@ -993,13 +1118,18 @@ function showDashPanel(id,el){
   document.getElementById('dpanel-'+id).classList.add('active');
   if(el)el.classList.add('active');
 }
+function setDbn(id){
+  document.querySelectorAll('.dbn-item').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById('dbn-'+id);
+  if(el)el.classList.add('active');
+}
 function renderDonationList(elId,limit){
   const d=limit?donations.slice(0,limit):donations;
   document.getElementById(elId).innerHTML=d.map(h=>`
     <div class="history-item">
       <div class="h-icon" style="background:${h.bg}">${h.icon}</div>
       <div class="h-info"><div class="h-name">${h.name}</div><div class="h-org">${h.org}</div></div>
-      <div class="h-right"><div class="h-amt">$${h.amt}</div><div class="h-date">${h.date}</div><div class="h-status ${h.type==='monthly'?'status-monthly':'status-done'}">${h.type==='monthly'?'Monthly':'Completed'}</div></div>
+      <div class="h-right"><div class="h-amt">$${h.amt}</div><div class="h-date">${h.date}</div><div class="h-status ${h.type==='monthly'?'status-monthly':'status-done'}">${h.type==='monthly'?'Monthly':'Done'}</div></div>
     </div>`).join('');
 }
 renderDonationList('recent-donations',4);
@@ -1032,7 +1162,6 @@ document.getElementById('following-grid').innerHTML=followOrgs.map(o=>`
     <button class="unfollow-btn" onclick="this.textContent=this.textContent==='Unfollow'?'+ Follow':'Unfollow'">Unfollow</button>
   </div>`).join('');
 
-/* sidebar clicks update active state */
 document.querySelectorAll('.dash-sb-item').forEach(item=>{
   item.addEventListener('click',function(){
     document.querySelectorAll('.dash-sb-item').forEach(i=>i.classList.remove('active'));
@@ -1040,6 +1169,5 @@ document.querySelectorAll('.dash-sb-item').forEach(item=>{
   });
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
